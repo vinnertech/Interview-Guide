@@ -1,0 +1,262 @@
+﻿<USER_REQUEST>
+You are a Senior Full Stack Developer + .NET Architect + UI/UX Designer + Technical Interview Coach.
+
+I want to build a COMPLETE â€œ.NET & C# Interview Guide Websiteâ€ using:
+
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
+- Bootstrap 5
+- Prism.js (Syntax Highlighting)
+
+This website must be:
+
+âœ” Fully Responsive
+âœ” Professional UI
+âœ” Enterprise Level Design
+âœ” Modern Animated Layout
+âœ” Accordion Based Q&A
+âœ” Search Functionality
+âœ” Sticky Sidebar Navigation
+âœ” Dark/Light Mode Toggle
+âœ” Scroll Progress Bar
+âœ” Copy Code Button
+âœ” Smooth Animations
+âœ” Expand/Collapse All
+âœ” Category Filtering
+âœ” Scroll To Top Button
+
+------------------------------------------------------------
+ðŸ“Œ CONTENT REQUIREMENTS (VERY IMPORTANT)
+------------------------------------------------------------
+
+1ï¸âƒ£ Include ALL 190 Questions EXACTLY as provided below.
+2ï¸âƒ£ Do NOT skip any question.
+3ï¸âƒ£ For EACH question provide:
+
+ðŸ”¹ 1. Detailed Explanation in English (Clear & Deep)
+ðŸ”¹ 2. Real-world Industry Example
+ðŸ”¹ 3. Proper C# Code Example (Working & Commented)
+ðŸ”¹ 4. Interview Tip (What interviewer expects)
+ðŸ”¹ 5. Common Mistakes
+ðŸ”¹ 6. Quick Summary
+
+Answers must NOT be short.
+They must be detailed, conceptual, interview-focused, and practical.
+
+------------------------------------------------------------
+ðŸŽ¨ WEBSITE STRUCTURE
+------------------------------------------------------------
+
+1ï¸âƒ£ Hero Section:
+- Title: ".NET & C# Complete Interview Guide"
+- Subtitle
+- Gradient background
+- Search Bar
+- Dark Mode Toggle
+
+2ï¸âƒ£ Sticky Sidebar Categories:
+- .NET Fundamentals
+- CLR & Memory
+- OOP Concepts
+- Delegates & Events
+- Collections
+- Multithreading
+- Exception Handling
+- Abstract & Interfaces
+- Garbage Collector
+- Design Patterns
+- Repository Pattern
+- Factory & DI Patterns
+
+3ï¸âƒ£ Main Content:
+- Bootstrap Accordion for each question
+- Expand/Collapse animation
+- Copy Code button inside each code block
+- Proper spacing
+- Clean UI
+
+4ï¸âƒ£ Footer:
+- About Section
+- Contact
+- Version Info
+
+------------------------------------------------------------
+ðŸŽ¯ MANDATORY ANSWER FORMAT
+------------------------------------------------------------
+
+====================================================
+Question X: [Question Text]
+====================================================
+
+ðŸ”¹ 1. Explanation in English:
+(Detailed explanation)
+
+ðŸ”¹ 2. Real-world Example:
+
+ðŸ”¹ 3. Code Example:
+
+```csharp
+// Proper working C# code with comments
+```
+
+ðŸ”¹ 4. Interview Tip:
+
+ðŸ”¹ 5. Common Mistakes:
+
+ðŸ”¹ 6. Quick Summary:
+
+------------------------------------------------------------
+ðŸ“‹ COMPLETE QUESTION LIST (ALL 190)
+------------------------------------------------------------
+
+Question 1 :- Explain difference between .NET and C# ?
+Question 2 :- .NET Framework vs .NET Core vs .NET 5.0
+Question 3 :- What is IL ( Intermediate Language) Code ?
+Question 4 :- What is the use of JIT ( Just in time compiler) ?
+Question 5 :- Is it possible to view IL code ?
+Question 6 :- What is the benefit of compiling in to IL code ?
+Question 7 :- Does .NET support multiple programming languages ?
+Question 8 :- What is CLR ( Common Language Runtime) ?
+Question 9 :- What is managed and unmanaged code ?
+Question 10 :- Explain the importance of Garbage collector ?
+Question 11 :- Can garbage collector claim unmanaged objects ?
+Question 12 :- What is the importance of CTS(Common Types System) ?
+Question 13 :- Explain CLS ?
+Question 14 :- Difference between Stack vs Heap ?
+Question 15 :- What are Value types & Reference types?
+Question 16 :- Explain boxing and unboxing ?
+Question 17 :- What is consequence of boxing and unboxing ?
+Question 18 :- Explain casting, implicit casting and explicit casting ?
+Question 19 :- What can happen during explicit casting ?
+Question 20 :- Differentiate between Array and ArrayList ?
+Question 21 :- Whose performance is better array or arraylist ?
+Question 22 :- What are generic collections ?
+Question 23 :- What are threads (Multithreading)?
+Question 24 :- How are threads different from TPL(Task Parallel Library) ?
+Question 25 :- How do we handle exceptions in C#(try/catch)?
+Question 26 :- What is the need of finally?
+Question 27 :- Why do we need the out keyword ?
+Question 28 :- What is the need of Delegates ?
+Question 29 :- What are events ?
+Question 30 :- Whats the difference between Abstract class and interface ?
+Question 31 - What is a Delegate and how to create a Delegate?
+Question 32 - Where have you used Delegates?
+Question 33 - What is a Multicast Delegates?
+Question 34 - What is an Event?
+Question 35 - How to Create an Event?
+Question 36 - Delegate VS Events
+Question 37 :- Why do we need Object Oriented Programming (OOP) ?
+Question 38 :- What are the important pillars of OOPs ?
+Question 39 :- What is a class and object ?
+Question 40 :- Abstraction vs Encapsulation?
+Question 41 :- Explain Inheritance ?
+Question 42 :- Explain virtual keyword ?
+Question 43 :- What is overriding ?
+Question 44 :- Explain overloading ?
+Question 45 :- Overloading vs Overriding ?
+Question 44 :- What is polymorphism ?
+Question 45 :- Can polymorphism work with out inheritance ?
+Question 46 :- Explain static vs dynamic polymorphism ?
+Question 47 :- Explain operator overloading ?
+Question 48 :- Why do we need Abstract classes ?
+Question 49 :- Are Abstract methods virtual ?
+Question 50 :- Can we create a instance of Abstract classes ?
+Question 51 :- Is it compulsory to implement Abstract methods ?
+Question 52 :- Why canâ€™t simple base class replace Abstract class ?
+Question 53 :- Explain interfaces and why do we need it ?
+Question 54 :- Can we write logic in interface ?
+Question 55 :- Can we define methods as private in interface ?
+Question 56 :- If I want to change interface what's the best practice ?
+Question 57 :- Explain Multiple inheritance in Interface ?
+Question 58 :- Explain Interface Segregation principle ?
+Question 59 :- Can we create instance of interface ?
+Question 60 :- Can we do Multiple inheritance with Abstract classes ?
+Question 61:- Abstract Class vs Interface
+Question 62 :- Why do we need constructors ?
+Question 63 :- In parent child which constructor fires first ?
+Question 64 :- How are initializers executed ?
+Question 65 :- How are static constructors executed in Parent child ?
+Question 66 :- When does static constructor fires ?
+Question 127: - Explain Garbage collector (GC)?
+Question 128:- How does Garbage collector know when to clean the objects ?
+Question 149:- Explain weak and strong references ?
+Question 150 :- When will you use weak references ?
+Question 151:- What are design patterns?
+Question 152 :- Which are the different types of design patterns?
+Question 153 :- Explain structural , Behavioral and Creational design pattern ?
+Question 154 :- Which design pattern have you used in your project?
+Question 154 :- Explain Singleton Pattern and the use of the same?
+Question 155 :- How did you implement singleton pattern?
+Question 156 :- Can we use Static class rather than using a private constructor?
+Question 157:-  Static vs Singleton pattern?
+Question 158:- How did you implement thread safety in Singleton?
+Question 159:- What is double null check in Singleton?
+Question 160:-Can Singleton pattern code be made easy with Lazy keyword?
+Question 161:-Can we rid of this double null check code?
+Question 162:-What is the use of repository pattern?
+Question 163:-Is Dal (Data access Layer) and Repository same?
+Question 164:-What is Generic repository pattern ?
+Question 165:-Is abstraction the only benefit of Repository?
+Question 166:-How to implement transaction in repository?
+Question 167:-What is Unit of work design pattern?
+Question 168:-Do we need repository pattern as EF does almost the same work?
+Question 169:-Did you do unit testing with Repository ?
+Question 170:-How does repository pattern make unit testing easy?
+Question 171:-How can we do mock testing with Repository?
+Question 172 :- What is Factory pattern  and how does it benefit?
+Question 173 :- How does centralizing object creation helps in loose coupling ?
+Question 174 :- What is IOC and DI ?
+Question 175 :- DI vs IOC ?
+Question 176 :-  What is a service locator ?
+Question 177:-   Service Locator vs DI  ?
+Question 178 :-   Which is good to use Service Locator or DI ?
+Question 179 :- Can not we use a simple class rather than interface for DI ?
+Question 180 :- Is DI a Factory Pattern?
+Question 181 :- So If you just centralize object creation is it Factory pattern?
+Question 182 :-  Static DI and Dynamic DI ?
+Question 183 :-  In which scenarios to use Static DI vs Dynamic DI ?
+Question 184 :-  The real Factory pattern ?
+Question 185 :-  Factory Method vs Factory pattern ?
+Question 186 :-  How are new behaviors created in Factory pattern ?
+Question 187 :-  What is Abstract Factory Pattern ?
+Question 188 :-  Does Abstract Factory Pattern use FP inside ?
+Question 189 :-  Simple Factory vs Factory (Factory Method) vs Abstract Factory ?
+Question 190 :-  How to remove IF conditions from Simple Factory?
+
+------------------------------------------------------------
+FINAL OUTPUT:
+------------------------------------------------------------
+
+Generate a complete SINGLE HTML file including:
+- All UI
+- All 190 Q&A
+- Working JavaScript
+- Professional Design
+- Interview-ready explanations
+- Code examples
+- Production quality UI
+
+Make it enterprise-grade and visually beautiful.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-30T18:37:54+05:30.
+
+The user's current state is as follows:
+Active Document: e:\Fluter-Projects\Antigravity-Flutter\parth_app_aartisangrah\README.md (LANGUAGE_MARKDOWN)
+Cursor is on line: 1
+Other open documents:
+- e:\Fluter-Projects\Antigravity-Flutter\parth_app_aartisangrah\README.md (LANGUAGE_MARKDOWN)
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.1 Pro (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 7d806401-2231-45fa-8235-b8d9b36cf23e: Flutter Android App Migration
+- Created: 2026-07-30T09:54:00Z
+- Last modified: 2026-07-30T12:17:07Z
+
+</conversation_summaries>

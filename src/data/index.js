@@ -1,0 +1,17 @@
+export { interviewQuestions as angularQuestions } from './angular-data.js';
+export { interviewQuestions as backendQuestions } from './backend-data.js';
+export { interviewQuestions as bootstrapQuestions } from './bootstrap-data.js';
+export { interviewQuestions as csharpQuestions } from './csharp-data.js';
+export { interviewQuestions as cssQuestions } from './css-data.js';
+export { interviewQuestions as dotnetQuestions } from './dotnet-data.js';
+export { interviewQuestions as efcoreQuestions } from './efcore-data.js';
+export { interviewQuestions as htmlQuestions } from './html-data.js';
+export { interviewQuestions as javaQuestions } from './java-data.js';
+export { interviewQuestions as javascriptQuestions } from './javascript-data.js';
+export { interviewQuestions as jqueryQuestions } from './jquery-data.js';
+export { interviewQuestions as mongodbQuestions } from './mongodb-data.js';
+export { interviewQuestions as nodejsQuestions } from './nodejs-data.js';
+export { interviewQuestions as pythonQuestions } from './python-data.js';
+export { interviewQuestions as reactQuestions } from './react-data.js';
+export { interviewQuestions as sqlQuestions } from './sql-data.js';
+export { interviewQuestions as typescriptQuestions } from './typescript-data.js';

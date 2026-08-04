@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   CSS Variables & Theming
+   ========================================================================== */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --primary-color: #0d6efd;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accordion-bg: #ffffff;
+    --accordion-hover: #f1f3f5;
+    --code-bg: #2d2d2d;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --border-color: #2c2c2c;
+    --primary-color: #3b82f6;
+    --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+    --accordion-bg: #1e1e1e;
+    --accordion-hover: #2a2a2a;
+    --glass-bg: rgba(20, 20, 20, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    scroll-behavior: smooth;
+    padding-top: 0;
+}
+
+/* Outstanding Animated Mesh Background for Home */
+.home-bg {
+    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e3a8a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+[data-theme="light"] .home-bg {
+    background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #f1f5f9);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Staggered Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Scroll Progress Bar */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s;
+}
+
+/* Scroll to Top Button */
+.portal-card {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--glass-border);
+    border-left: 1px solid var(--glass-border);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.portal-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    transition: all 0.5s ease;
+}
+
+.portal-card:hover::before {
+    left: 150%;
+}
+
+.portal-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 40px -10px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.05) inset;
+    border-color: var(--primary-color);
+}
+.icon-huge {
+    font-size: 5.5rem;
+    margin-bottom: 25px;
+    filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.4));
+    transition: transform 0.4s ease;
+}
+.portal-card:hover .icon-huge {
+    transform: scale(1.1) translateY(-5px);
+}    
+#btn-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7;
+}
+
+#btn-back-to-top:hover {
+    transform: translateY(-5px);
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero-section {
+    background: var(--primary-gradient);
+    position: relative;
+    overflow: hidden;
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    100% { transform: rotate(360deg); }
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2) !important;
+}
+
+.theme-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+.sticky-sidebar {
+    position: sticky;
+    top: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+}
+
+.list-group-item {
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: var(--accordion-hover);
+    padding-left: 1.5rem;
+}
+
+.list-group-item.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   Accordion Customization
+   ========================================================================== */
+.custom-accordion .accordion-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px !important;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-accordion .accordion-item:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.custom-accordion .accordion-button {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: none !important;
+    padding: 1.25rem 1.5rem;
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+    color: var(--primary-color);
+    background-color: var(--accordion-hover);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.accordion-body {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 1.5rem;
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   Content Sections Styling
+   ========================================================================== */
+.content-section {
+    margin-bottom: 1.5rem;
+}
+
+.content-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tip-box {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.mistake-box {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.summary-box {
+    background-color: rgba(25, 135, 84, 0.1);
+    border-left: 4px solid #198754;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+/* Code Container & Copy Button */
+.code-container {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.btn-copy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 10;
+}
+
+.btn-copy:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+pre[class*="language-"] {
+    margin: 0 !important;
+    border-radius: 6px !important;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+}
