@@ -1,0 +1,27 @@
+import React from 'react';
+
+export default function Logo({ size = 32 }) {
+  return (
+    <div style={{ width: size, height: size, flexShrink: 0 }}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+        <defs>
+          <linearGradient id="vgradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FF512F"/>
+            <stop offset="100%" stopColor="#DD2476"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="22" fill="#0A1128"/>
+        <g stroke="url(#vgradient)" strokeWidth="1.2" fill="none">
+          <polygon points="95,50 86,76 64,93 36,93 14,76 5,50 14,24 36,7 64,7 86,24" />
+          <polygon points="74,58 65,70 50,75 35,70 26,58 26,42 35,30 50,25 65,30 74,42" />
+          <polygon points="95,50 74,58 86,76 65,70 64,93 50,75 36,93 35,70 14,76 26,58 5,50 26,42 14,24 35,30 36,7 50,25 64,7 65,30 86,24 74,42" />
+        </g>
+        <path d="M 32 30 L 42 30 L 50 62 L 58 30 L 68 30 L 55 80 L 45 80 Z" fill="url(#vgradient)" />
+        <g fill="url(#vgradient)">
+          <circle cx="95" cy="50" r="2.5"/><circle cx="86" cy="76" r="2.5"/><circle cx="64" cy="93" r="2.5"/><circle cx="36" cy="93" r="2.5"/><circle cx="14" cy="76" r="2.5"/><circle cx="5" cy="50" r="2.5"/><circle cx="14" cy="24" r="2.5"/><circle cx="36" cy="7" r="2.5"/><circle cx="64" cy="7" r="2.5"/><circle cx="86" cy="24" r="2.5"/>
+          <circle cx="74" cy="58" r="2.5"/><circle cx="65" cy="70" r="2.5"/><circle cx="50" cy="75" r="2.5"/><circle cx="35" cy="70" r="2.5"/><circle cx="26" cy="58" r="2.5"/><circle cx="26" cy="42" r="2.5"/><circle cx="35" cy="30" r="2.5"/><circle cx="50" cy="25" r="2.5"/><circle cx="65" cy="30" r="2.5"/><circle cx="74" cy="42" r="2.5"/>
+        </g>
+      </svg>
+    </div>
+  );
+}

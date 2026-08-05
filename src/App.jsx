@@ -5,6 +5,12 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import TopicPage from './pages/TopicPage';
 
+// SEO Pages
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+
 // Import data
 import {
   angularQuestions, backendQuestions, bootstrapQuestions, csharpQuestions,
@@ -21,6 +27,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            
+            {/* SEO & Standard Pages */}
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="terms" element={<Terms />} />
+
+            {/* Topic Pages */}
             <Route path="dotnet" element={<TopicPage title=".NET" description="198 Questions: CLR, Memory, Repository Pattern, DI, and Architecture." questions={dotnetQuestions || []} />} />
             <Route path="csharp" element={<TopicPage title="C#" description="100 Questions: C# Fundamentals, OOP Concepts, LINQ, Memory Management, Async/Await." questions={csharpQuestions || []} />} />
             <Route path="efcore" element={<TopicPage title="EF Core & Dapper" description="118 Questions: Entity Framework Core, Change Tracking, Migrations, LINQ, and Dapper." questions={efcoreQuestions || []} />} />

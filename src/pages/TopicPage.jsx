@@ -3,98 +3,133 @@ import { Helmet } from 'react-helmet-async';
 import QuestionItem from '../components/QuestionItem';
 
 export default function TopicPage({ title, description, questions }) {
-  const [currentCategory, setCurrentCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isAllExpanded, setIsAllExpanded] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('');
 
-  // Re-run Prism when questions change or expand state changes
+  // Extract unique categories
+  const categories = useMemo(() => {
+    return [...new Set(questions.map(q => q.category))];
+  }, [questions]);
+
+  // Group questions by category
+  const groupedQuestions = useMemo(() => {
+    const groups = {};
+    categories.forEach(cat => {
+      groups[cat] = questions.filter(q => q.category === cat && 
+        (q.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+         (q.explanation && q.explanation.toLowerCase().includes(searchQuery.toLowerCase())))
+      );
+    });
+    return groups;
+  }, [questions, categories, searchQuery]);
+
+  // Highlight syntax when data changes
   useEffect(() => {
     if (window.Prism) {
       window.Prism.highlightAll();
     }
-  }, [currentCategory, searchQuery, isAllExpanded, questions]);
+  }, [searchQuery, questions]);
 
-  const categories = useMemo(() => {
-    return ['All', ...new Set(questions.map(q => q.category))];
-  }, [questions]);
+  // Setup IntersectionObserver to highlight active category in sidebar based on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveCategory(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-20% 0px -80% 0px' });
 
-  const filteredQuestions = useMemo(() => {
-    return questions.filter(q => {
-      const matchCategory = currentCategory === 'All' || q.category === currentCategory;
-      const matchSearch = q.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (q.explanation && q.explanation.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchCategory && matchSearch;
+    categories.forEach(cat => {
+      const el = document.getElementById(cat.replace(/\s+/g, '-'));
+      if (el) observer.observe(el);
     });
-  }, [questions, currentCategory, searchQuery]);
+
+    return () => observer.disconnect();
+  }, [categories, searchQuery]);
+
+  const scrollToCategory = (cat) => {
+    const el = document.getElementById(cat.replace(/\s+/g, '-'));
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
       <Helmet>
-        <title>{title} Interview Guide - Enterprise Portal</title>
+        <title>{title} Tutorial - VinnerTECH</title>
         <meta name="description" content={description} />
       </Helmet>
 
       {/* Hero Section */}
-      <header className="hero-section text-center py-5">
-        <div className="container position-relative">
-          <h1 className="display-4 fw-bold text-white mb-3">{title} Interview Guide</h1>
-          <p className="lead text-white-50 mb-4">{description}</p>
-          
-          <div className="row justify-content-center mb-3">
-            <div className="col-md-6 position-relative">
-              <input 
-                type="text" 
-                className="form-control form-control-lg glass-input" 
-                placeholder="Search questions, topics, or keywords..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <i className="bi bi-search position-absolute top-50 end-0 translate-middle-y me-4 text-muted"></i>
-            </div>
-          </div>
+      <div className="border-bottom py-4 mb-4" style={{ backgroundColor: 'var(--card-bg)' }}>
+        <div className="container">
+          <h1 className="fw-bold text-gradient">{title} Tutorial</h1>
+          <p className="text-muted mb-0">{description}</p>
         </div>
-      </header>
+      </div>
 
-      {/* Main Content */}
-      <div className="container my-5" style={{ flex: 1 }}>
+      <div className="container" style={{ flex: 1 }}>
         <div className="row">
-          {/* Sidebar */}
-          <aside className="col-lg-3 mb-4">
-            <div className="sticky-sidebar p-3 glass-card rounded shadow-sm">
-              <h5 className="fw-bold mb-3 d-flex align-items-center"><i className="bi bi-tags-fill me-2 text-primary"></i> Categories</h5>
+          
+          {/* Left Sidebar (Chapters) */}
+          <aside className="col-lg-3 d-none d-lg-block mb-4">
+            <div className="sidebar-wrapper p-3">
+              <h6 className="fw-bold mb-3 px-2 text-uppercase text-muted" style={{ fontSize: '0.8rem' }}>Chapters</h6>
               <div className="list-group list-group-flush">
                 {categories.map(cat => (
                   <button 
                     key={cat}
-                    onClick={() => setCurrentCategory(cat)}
-                    className={`list-group-item list-group-item-action rounded mb-1 ${cat === currentCategory ? 'active' : ''}`}
+                    onClick={() => scrollToCategory(cat)}
+                    className={`list-group-item list-group-item-action text-start ${activeCategory === cat.replace(/\s+/g, '-') ? 'active' : ''}`}
                   >
-                    {cat === 'All' ? 'All Questions' : cat}
+                    {cat}
                   </button>
                 ))}
               </div>
             </div>
           </aside>
 
-          {/* Accordion Content */}
-          <main className="col-lg-9">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <h4 className="fw-bold m-0">{currentCategory === 'All' ? 'All Questions' : currentCategory}</h4>
-              <button onClick={() => setIsAllExpanded(!isAllExpanded)} className="btn btn-sm btn-primary rounded-pill px-3">
-                <i className={`bi ${isAllExpanded ? 'bi-arrows-collapse' : 'bi-arrows-expand'}`}></i> {isAllExpanded ? 'Collapse All' : 'Expand All'}
-              </button>
+          {/* Main Content */}
+          <main className="col-lg-9 mb-5">
+            <div className="mb-4">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder={`Search ${title} questions...`}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
             
-            <div className="accordion custom-accordion">
-              {filteredQuestions.length > 0 ? (
-                filteredQuestions.map(q => (
-                  <QuestionItem key={q.id} question={q} isAllExpanded={isAllExpanded} />
-                ))
-              ) : (
+            <div className="accordion">
+              {categories.map((cat, idx) => {
+                const catQuestions = groupedQuestions[cat];
+                if (catQuestions.length === 0) return null;
+
+                const catId = cat.replace(/\s+/g, '-');
+                
+                return (
+                  <div key={cat} id={catId} style={{ scrollMarginTop: '100px' }}>
+                    <h3 className="category-section-title">
+                      <i className="bi bi-bookmark-fill me-2"></i>
+                      Chapter {idx + 1}: {cat}
+                    </h3>
+                    
+                    {catQuestions.map(q => (
+                      <QuestionItem key={q.id} question={q} />
+                    ))}
+                  </div>
+                );
+              })}
+
+              {Object.values(groupedQuestions).every(arr => arr.length === 0) && (
                 <div className="text-center py-5">
-                  <i className="bi bi-emoji-frown display-1 text-muted mb-3"></i>
-                  <h3>No questions found!</h3>
-                  <p className="text-muted">Try adjusting your search or category filter.</p>
+                  <i className="bi bi-search display-4 text-muted mb-3"></i>
+                  <h4>No results found</h4>
+                  <p className="text-muted">Try adjusting your search query.</p>
                 </div>
               )}
             </div>
