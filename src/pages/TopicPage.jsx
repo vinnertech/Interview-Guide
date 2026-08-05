@@ -59,8 +59,25 @@ export default function TopicPage({ title, description, questions }) {
   return (
     <>
       <Helmet>
-        <title>{title} Tutorial - VinnerTECH</title>
-        <meta name="description" content={description} />
+        <title>{title} Interview Questions & Answers - VinnerTECH</title>
+        <meta name="description" content={`Master ${title} with our comprehensive list of interview questions and answers. Perfect for ${title} developers preparing for technical interviews.`} />
+        <meta property="og:title" content={`${title} Interview Questions & Answers - VinnerTECH`} />
+        <meta property="og:description" content={`Prepare for your next technical interview with top ${title} questions and answers.`} />
+        <link rel="canonical" href={`https://vinnertech.github.io/${title.toLowerCase().replace(/\s+/g, '-')}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": questions.slice(0, 10).map(q => ({
+              "@type": "Question",
+              "name": q.title,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": q.explanation || "See detailed answer on the website."
+              }
+            }))
+          })}
+        </script>
       </Helmet>
 
       {/* Hero Section */}
@@ -94,13 +111,20 @@ export default function TopicPage({ title, description, questions }) {
 
           {/* Main Content */}
           <main className="col-lg-9 mb-5">
-            <div className="mb-4">
+            <div className="mb-4 position-relative transition fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <i className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-4" style={{ zIndex: 10, color: 'var(--text-color)' }}></i>
               <input 
                 type="text" 
-                className="form-control" 
-                placeholder={`Search ${title} questions...`}
+                className="form-control form-control-lg rounded-pill shadow-sm ps-5 border transition" 
+                placeholder={`Search ${title} questions, topics, or keywords...`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ 
+                  backgroundColor: 'var(--card-bg)', 
+                  color: 'var(--heading-color)', 
+                  borderColor: 'var(--border-color)',
+                  fontSize: '1rem'
+                }}
               />
             </div>
             

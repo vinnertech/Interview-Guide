@@ -25,12 +25,25 @@ export default function ScrollToTop() {
 
   return (
     <button 
+      className="btn shadow-lg d-flex align-items-center justify-content-center transition btn-pulse"
       id="btn-back-to-top" 
       title="Go to top" 
       onClick={scrollToTop}
-      style={{ display: isVisible ? 'block' : 'none' }}
+      style={{ 
+        display: isVisible ? 'flex' : 'none',
+        position: 'fixed',
+        bottom: '30px',
+        right: '30px',
+        width: '50px',
+        height: '50px',
+        borderRadius: '50%',
+        zIndex: 1000,
+        backgroundColor: 'var(--primary-color)',
+        border: 'none',
+        color: '#fff',
+      }}
     >
-      <i className="bi bi-arrow-up-circle-fill"></i>
+      <i className="bi bi-arrow-up fs-4"></i>
     </button>
   );
 }

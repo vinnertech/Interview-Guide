@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://vinnertech.github.io
+
+# Sitemaps
+Sitemap: https://vinnertech.github.io/sitemap.xml
