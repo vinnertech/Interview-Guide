@@ -35,8 +35,16 @@ export default function Footer() {
             <ul className="list-unstyled">
               <li className="mb-2"><Link to="/react" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>React</Link></li>
               <li className="mb-2"><Link to="/angular" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Angular</Link></li>
+              <li className="mb-2"><Link to="/eda" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Event-Driven Arch</Link></li>
+              <li className="mb-2"><Link to="/dotnetcore" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>.NET Core API</Link></li>
               <li className="mb-2"><Link to="/dotnet" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>.NET</Link></li>
               <li className="mb-2"><Link to="/java" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Java</Link></li>
+              <li className="mb-2"><Link to="/cpp" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>C++</Link></li>
+              <li className="mb-2"><Link to="/agile" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Agile & Scrum</Link></li>
+              <li className="mb-2"><Link to="/git" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Git & GitHub</Link></li>
+              <li className="mb-2"><Link to="/azuredevops" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Azure DevOps</Link></li>
+              <li className="mb-2"><Link to="/awsdevops" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>AWS DevOps</Link></li>
+              <li className="mb-2"><Link to="/dockerk8s" className="text-decoration-none hover-primary" style={{ color: 'var(--text-color)' }}>Docker & Kubernetes</Link></li>
             </ul>
           </div>
           

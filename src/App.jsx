@@ -17,7 +17,9 @@ import {
   cssQuestions, dotnetQuestions, efcoreQuestions, htmlQuestions,
   javaQuestions, javascriptQuestions, jqueryQuestions, mongodbQuestions,
   nodejsQuestions, pythonQuestions, reactQuestions, sqlQuestions,
-  typescriptQuestions
+  typescriptQuestions, cppQuestions, azuredevopsQuestions, awsdevopsQuestions,
+  dockerk8sQuestions, dotnetcoreQuestions, edaQuestions, gitQuestions, agileQuestions,
+  csharpTutorialQuestions, aspnetMvcTutorialQuestions, aspnetCoreTutorialQuestions
 } from './data';
 
 export default function App() {
@@ -35,9 +37,11 @@ export default function App() {
             <Route path="terms" element={<Terms />} />
 
             {/* Topic Pages */}
+            <Route path="cpp" element={<TopicPage title="C++" description="184 Questions: C++ Fundamentals, OOP Concepts, Templates, STL, Modern C++, and Coding Problems." questions={cppQuestions || []} />} />
             <Route path="dotnet" element={<TopicPage title=".NET" description="198 Questions: CLR, Memory, Repository Pattern, DI, and Architecture." questions={dotnetQuestions || []} />} />
             <Route path="csharp" element={<TopicPage title="C#" description="100 Questions: C# Fundamentals, OOP Concepts, LINQ, Memory Management, Async/Await." questions={csharpQuestions || []} />} />
             <Route path="efcore" element={<TopicPage title="EF Core & Dapper" description="118 Questions: Entity Framework Core, Change Tracking, Migrations, LINQ, and Dapper." questions={efcoreQuestions || []} />} />
+            <Route path="dotnetcore" element={<TopicPage title=".NET Core Web API & MVC" description="150 Questions: ASP.NET Core Fundamentals, MVC, Web API, Middleware, JWT, Performance, Testing, and Real-World Scenarios." questions={dotnetcoreQuestions || []} />} />
             <Route path="java" element={<TopicPage title="Java" description="200 Questions: Core Java, Collections, Multithreading, Memory Management, Java 8+." questions={javaQuestions || []} />} />
             <Route path="backend" element={<TopicPage title="Java Backend" description="180 Questions: JDBC, Spring Framework, Spring Boot, Spring MVC, REST APIs, JPA/Hibernate, Microservices, Security, Performance, and Testing." questions={backendQuestions || []} />} />
             <Route path="html" element={<TopicPage title="HTML" description="120 Questions: HTML5, Semantics, Web APIs, Local Storage, and DOM." questions={htmlQuestions || []} />} />
@@ -52,6 +56,18 @@ export default function App() {
             <Route path="nodejs" element={<TopicPage title="Node.js" description="225 Questions: Event Loop, Express, Streams, Scaling, Microservices, and Auth." questions={nodejsQuestions || []} />} />
             <Route path="sql" element={<TopicPage title="SQL" description="120 Questions: Database Design, Queries, Window Functions, and Performance Tuning." questions={sqlQuestions || []} />} />
             <Route path="python" element={<TopicPage title="Python" description="240 Questions: Fundamentals, OOP, Magic Methods, Exceptions, Advanced Concepts, Asyncio, and Coding Algorithms." questions={pythonQuestions || []} />} />
+            <Route path="eda" element={<TopicPage title="Event-Driven Architecture" description="100 Questions: Event-Driven Architecture, RabbitMQ, Apache Kafka, Redis, Distributed Caching, and Real-World Scenarios." questions={edaQuestions || []} />} />
+            <Route path="git" element={<TopicPage title="Git & GitHub" description="150 Questions: Git Fundamentals, Commands, Branching, Rebase vs Merge, Azure Repos, GitHub Actions, and Git Security." questions={gitQuestions || []} />} />
+            <Route path="agile" element={<TopicPage title="Agile & Scrum" description="100 Questions: Agile, Waterfall, Scrum Framework, Ceremonies, Metrics, and Real-World Scenarios." questions={agileQuestions || []} />} />
+            <Route path="azuredevops" element={<TopicPage title="Azure DevOps" description="200 Questions: CI/CD, Azure Repos, Boards, Pipelines, Releases, and Best Practices." questions={azuredevopsQuestions || []} />} />
+            <Route path="awsdevops" element={<TopicPage title="AWS DevOps" description="200 Questions: AWS Services, EC2, S3, CodePipeline, Kubernetes, ECS, IAM, Security, CloudWatch, and Scenarios." questions={awsdevopsQuestions || []} />} />
+            <Route path="dockerk8s" element={<TopicPage title="Docker & Kubernetes" description="100 Questions: Containers, Images, Volumes, Pods, Deployments, Services, Scenarios, and Production Architecture." questions={dockerk8sQuestions || []} />} />
+
+            {/* Tutorials */}
+            <Route path="tutorial/csharp" element={<TopicPage title="C# Learning Guide" description="A highly detailed and completely accurate C# Learning Guide, carefully structured for beginners from basic syntax to advanced OOP concepts." questions={csharpTutorialQuestions || []} />} />
+            <Route path="tutorial/aspnet-mvc" element={<TopicPage title="ASP.NET MVC Guide" description="A highly detailed and completely accurate ASP.NET MVC Learning Guide, structured for beginners to master web development." questions={aspnetMvcTutorialQuestions || []} />} />
+            <Route path="tutorial/aspnet-core" element={<TopicPage title="ASP.NET Core Guide" description="A comprehensive guide to building high-performance, cross-platform applications with ASP.NET Core." questions={aspnetCoreTutorialQuestions || []} />} />
+            
             <Route path="*" element={<div className="container py-5 text-center"><h1>404 - Page Not Found</h1></div>} />
           </Route>
         </Routes>

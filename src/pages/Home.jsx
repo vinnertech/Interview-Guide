@@ -14,17 +14,34 @@ const topics = [
   { to: '/jquery', icon: 'bi-plugin', color: '#0769ad', title: 'Jquery', desc: 'Legacy DOM manipulation', category: 'Frontend' },
 
   // Backend & Core
+  { to: '/eda', icon: 'bi-bezier2', color: '#ff4d4d', title: 'Event-Driven Architecture', desc: 'RabbitMQ, Kafka, Redis', category: 'Backend & Core' },
+  { to: '/dotnetcore', icon: 'bi-box-seam-fill', color: '#512bd4', title: '.NET Core API & MVC', desc: 'Web API, MVC, Middleware', category: 'Backend & Core' },
   { to: '/dotnet', icon: 'bi-microsoft', color: '#512bd4', title: '.NET Core & Framework', desc: 'Enterprise backend development', category: 'Backend & Core' },
   { to: '/csharp', icon: 'bi-filetype-cs', color: '#9B4F96', title: 'C# Fundamentals', desc: 'OOP, LINQ, Async/Await', category: 'Backend & Core' },
   { to: '/java', icon: 'bi-cup-hot-fill', color: '#f89820', title: 'Java Core', desc: 'Collections, Threads, JVM', category: 'Backend & Core' },
   { to: '/backend', icon: 'bi-server', color: '#4CAF50', title: 'Java Backend', desc: 'Spring Boot, REST APIs, Microservices', category: 'Backend & Core' },
   { to: '/python', icon: 'bi-filetype-py', color: '#3776ab', title: 'Python', desc: 'Data, Scripting, and Web', category: 'Backend & Core' },
+  { to: '/cpp', icon: 'bi-c-circle-fill', color: '#00599C', title: 'C++', desc: 'Memory Management, OOP, STL', category: 'Backend & Core' },
   { to: '/nodejs', icon: 'bi-diagram-3-fill', color: '#339933', title: 'Node.js', desc: 'Event Loop, Express, Streams', category: 'Backend & Core' },
 
   // Database & ORM
   { to: '/sql', icon: 'bi-database', color: '#e67e22', title: 'SQL & Database Design', desc: 'Queries, Indexing, Window Functions', category: 'Database & ORM' },
   { to: '/efcore', icon: 'bi-database-fill-gear', color: '#0078d4', title: 'EF Core & Dapper', desc: 'Modern ORM and data access', category: 'Database & ORM' },
   { to: '/mongodb', icon: 'bi-env', color: '#47A248', title: 'MongoDB', desc: 'NoSQL, Aggregation, Sharding', category: 'Database & ORM' },
+
+  // DevOps & Cloud
+  { to: '/git', icon: 'bi-git', color: '#f14e32', title: 'Git & GitHub', desc: 'Version Control, Commands, CI/CD', category: 'DevOps & Cloud' },
+  { to: '/azuredevops', icon: 'bi-infinity', color: '#0078d4', title: 'Azure DevOps', desc: 'CI/CD, Pipelines, Releases', category: 'DevOps & Cloud' },
+  { to: '/awsdevops', icon: 'bi-cloud-arrow-up-fill', color: '#FF9900', title: 'AWS DevOps', desc: 'AWS Services, CI/CD, K8s', category: 'DevOps & Cloud' },
+  { to: '/dockerk8s', icon: 'bi-box-seam', color: '#2496ED', title: 'Docker & Kubernetes', desc: 'Containers & Orchestration', category: 'DevOps & Cloud' },
+
+  // Software Engineering
+  { to: '/agile', icon: 'bi-kanban', color: '#0052CC', title: 'Agile & Scrum', desc: 'Agile, Waterfall, Scrum Framework', category: 'Software Engineering' },
+
+  // Tutorials
+  { to: '/tutorial/csharp', icon: 'bi-book-half', color: '#9B4F96', title: 'C# Learning Guide', desc: 'Beginner to Advanced Tutorial', category: 'Tutorials (New)' },
+  { to: '/tutorial/aspnet-mvc', icon: 'bi-window', color: '#512bd4', title: 'ASP.NET MVC Guide', desc: 'Beginner to Advanced MVC', category: 'Tutorials (New)' },
+  { to: '/tutorial/aspnet-core', icon: 'bi-rocket-takeoff', color: '#512bd4', title: 'ASP.NET Core Guide', desc: 'High-Performance Web Apps', category: 'Tutorials (New)' }
 ];
 
 export default function Home() {
@@ -76,7 +93,9 @@ export default function Home() {
         {[
           { name: 'Frontend', icon: 'bi-window-sidebar', color: '#FF512F' },
           { name: 'Backend & Core', icon: 'bi-hdd-network', color: '#512bd4' },
-          { name: 'Database & ORM', icon: 'bi-database-fill-gear', color: '#13C296' }
+          { name: 'Database & ORM', icon: 'bi-database-fill-gear', color: '#13C296' },
+          { name: 'DevOps & Cloud', icon: 'bi-cloud-arrow-up-fill', color: '#0078d4' },
+          { name: 'Tutorials (New)', icon: 'bi-journal-code', color: '#9B4F96' }
         ].map((cat, catIndex) => (
           <div key={cat.name} className="mb-5 fade-in-up" style={{ animationDelay: `${0.1 * catIndex}s` }}>
             <div className="d-flex align-items-center mb-4 pb-3 border-bottom" style={{ borderColor: 'var(--border-color)' }}>

@@ -5,6 +5,34 @@ import QuestionItem from '../components/QuestionItem';
 export default function TopicPage({ title, description, questions }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('');
+  
+  // In-memory progress tracking
+  const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
+  const [completedIds, setCompletedIds] = useState(new Set());
+  
+  // Filters
+  const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
+  const [showCompletedOnly, setShowCompletedOnly] = useState(false);
+  const [showTopPriorityOnly, setShowTopPriorityOnly] = useState(false);
+  const [quickRevisionMode, setQuickRevisionMode] = useState(false);
+
+  const toggleBookmark = (id) => {
+    setBookmarkedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) newSet.delete(id);
+      else newSet.add(id);
+      return newSet;
+    });
+  };
+
+  const toggleComplete = (id) => {
+    setCompletedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) newSet.delete(id);
+      else newSet.add(id);
+      return newSet;
+    });
+  };
 
   // Extract unique categories
   const categories = useMemo(() => {
@@ -12,16 +40,28 @@ export default function TopicPage({ title, description, questions }) {
   }, [questions]);
 
   // Group questions by category
+  // Group questions by category and apply filters
   const groupedQuestions = useMemo(() => {
     const groups = {};
     categories.forEach(cat => {
-      groups[cat] = questions.filter(q => q.category === cat && 
-        (q.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-         (q.explanation && q.explanation.toLowerCase().includes(searchQuery.toLowerCase())))
-      );
+      groups[cat] = questions.filter(q => {
+        // Category match
+        if (q.category !== cat) return false;
+        
+        // State filters
+        if (showBookmarkedOnly && !bookmarkedIds.has(q.id)) return false;
+        if (showCompletedOnly && !completedIds.has(q.id)) return false;
+        if (showTopPriorityOnly && q.priority !== 'High') return false;
+        
+        // Text match
+        const matchesSearch = q.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          (q.explanation && q.explanation.toLowerCase().includes(searchQuery.toLowerCase()));
+          
+        return matchesSearch;
+      });
     });
     return groups;
-  }, [questions, categories, searchQuery]);
+  }, [questions, categories, searchQuery, showBookmarkedOnly, showCompletedOnly, showTopPriorityOnly, bookmarkedIds, completedIds]);
 
   // Highlight syntax when data changes
   useEffect(() => {
@@ -128,6 +168,44 @@ export default function TopicPage({ title, description, questions }) {
               />
             </div>
             
+            {/* Filters Bar */}
+            <div className="d-flex flex-wrap gap-2 mb-4 p-3 rounded fade-in-up" style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)', animationDelay: '0.2s' }}>
+              <button 
+                className={`btn btn-sm ${quickRevisionMode ? 'btn-primary' : 'btn-outline-primary'} rounded-pill fw-bold`}
+                onClick={() => setQuickRevisionMode(!quickRevisionMode)}
+              >
+                <i className="bi bi-lightning-charge-fill me-1"></i> Quick Revision
+              </button>
+              
+              <div className="vr mx-1 d-none d-md-block" style={{ backgroundColor: 'var(--border-color)' }}></div>
+              
+              <button 
+                className={`btn btn-sm ${showBookmarkedOnly ? 'btn-warning text-dark' : 'btn-outline-warning'} rounded-pill fw-bold`}
+                onClick={() => setShowBookmarkedOnly(!showBookmarkedOnly)}
+              >
+                <i className={showBookmarkedOnly ? "bi bi-bookmark-fill me-1" : "bi bi-bookmark me-1"}></i> 
+                Bookmarked ({bookmarkedIds.size})
+              </button>
+              
+              <button 
+                className={`btn btn-sm ${showCompletedOnly ? 'btn-success' : 'btn-outline-success'} rounded-pill fw-bold`}
+                onClick={() => setShowCompletedOnly(!showCompletedOnly)}
+              >
+                <i className={showCompletedOnly ? "bi bi-check-circle-fill me-1" : "bi bi-check-circle me-1"}></i> 
+                Completed ({completedIds.size})
+              </button>
+              
+              <div className="vr mx-1 d-none d-md-block" style={{ backgroundColor: 'var(--border-color)' }}></div>
+              
+              <button 
+                className={`btn btn-sm ${showTopPriorityOnly ? 'btn-danger' : 'btn-outline-danger'} rounded-pill fw-bold`}
+                onClick={() => setShowTopPriorityOnly(!showTopPriorityOnly)}
+              >
+                <i className="bi bi-star-fill me-1"></i> 
+                Top 50 Priority
+              </button>
+            </div>
+            
             <div className="accordion">
               {categories.map((cat, idx) => {
                 const catQuestions = groupedQuestions[cat];
@@ -143,7 +221,15 @@ export default function TopicPage({ title, description, questions }) {
                     </h3>
                     
                     {catQuestions.map(q => (
-                      <QuestionItem key={q.id} question={q} />
+                      <QuestionItem 
+                        key={q.id} 
+                        question={q} 
+                        isBookmarked={bookmarkedIds.has(q.id)}
+                        isCompleted={completedIds.has(q.id)}
+                        onToggleBookmark={() => toggleBookmark(q.id)}
+                        onToggleComplete={() => toggleComplete(q.id)}
+                        quickRevisionMode={quickRevisionMode}
+                      />
                     ))}
                   </div>
                 );

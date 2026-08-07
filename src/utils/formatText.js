@@ -10,6 +10,9 @@ export function formatText(str) {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
       
+  // Unescape specific safe HTML tags that we use for formatting
+  formatted = formatted.replace(/&lt;(\/?(?:h3|h4|p|ul|ol|li|strong|em))&gt;/gi, '<$1>');
+      
   // Bold: **text**
   formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
   // Inline Code: `text`

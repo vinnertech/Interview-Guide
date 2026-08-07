@@ -1,0 +1,229 @@
+export const aspnetMvcTutorialQuestions = [
+  {
+    "id": 1,
+    "title": "1. Overview of MVC Architecture",
+    "category": "Phase 1: Architecture & Setup",
+    "language": "csharp",
+    "explanation": "<h3>The Separation of Concerns</h3>\n<p>The <strong>MVC (Model-View-Controller)</strong> architectural pattern is a software design philosophy that separates an application into three interconnected components. This separation forces developers to write organized, testable, and maintainable code.</p>\n<h4>The Three Pillars:</h4>\n<ol>\n    <li><strong>Model (The Data):</strong> Represents the shape of the data and the business logic of the application. The Model is completely blind to the user interface. It talks to the database, performs calculations, and validates rules (e.g., \"User's age must be > 18\").</li>\n    <li><strong>View (The Interface):</strong> The visual representation of the Model. The View only displays data. It contains HTML, CSS, and some C# Razor syntax to loop through data. It should contain ZERO business logic.</li>\n    <li><strong>Controller (The Brain):</strong> The orchestrator. It receives the incoming HTTP request from the user, asks the Model for the required data, and then hands that data to a specific View to be rendered as HTML.</li>\n</ol>",
+    "diagram": "flowchart TD\n    User((\"User / Browser\")) -->|\"1. HTTP Request\"| Controller[\"Controller (The Brain)\"]\n    Controller -->|\"2. Get or Update Data\"| Model[\"Model (Database & Logic)\"]\n    Model -->|\"3. Return Data\"| Controller\n    Controller -->|\"4. Send Data to UI\"| View[\"View (HTML UI)\"]\n    View -->|\"5. Render HTML\"| User\n    \n    style Controller fill:#3b82f6,color:#fff\n    style Model fill:#10b981,color:#fff\n    style View fill:#f59e0b,color:#fff",
+    "tip": "Never query the database directly inside a View file (`.cshtml`). This violates the core principle of MVC. The Controller should fetch the data and pass it to the View via a strongly-typed ViewModel.",
+    "summary": "MVC separates an application into the Model (business logic), View (presentation), and Controller (request orchestration), ensuring code is clean and highly testable."
+  },
+  {
+    "id": 2,
+    "title": "2. MVC Basics in ASP.NET",
+    "category": "Phase 1: Architecture & Setup",
+    "language": "csharp",
+    "explanation": "<h3>How ASP.NET implements the Pattern</h3>\n<p>ASP.NET MVC is Microsoft's implementation of the MVC pattern on top of the .NET Framework. It was designed as a modern alternative to the older <strong>ASP.NET WebForms</strong>.</p>\n<h4>Why MVC over WebForms?</h4>\n<p>WebForms tried to hide the true nature of the web (HTML/HTTP) behind a complex event-driven model (ViewState, drag-and-drop components). This resulted in bloated, slow pages that were impossible to Unit Test.</p>\n<p>ASP.NET MVC forces developers to embrace the web. You have absolute, 100% control over the generated HTML. Because the Controller is just a standard C# class that doesn't depend on the UI, you can easily write automated tests for it.</p>",
+    "code": "// A standard ASP.NET MVC Controller\npublic class HomeController : Controller\n{\n    // The incoming HTTP GET request maps to this \"Action Method\"\n    public ActionResult Index()\n    {\n        // 1. Controller gets data from Model\n        var time = DateTime.Now; \n        \n        // 2. Controller hands data to the View\n        ViewBag.CurrentTime = time; \n        return View();\n    }\n}",
+    "summary": "ASP.NET MVC provides absolute control over HTML output and embraces the stateless nature of the web, replacing the bloated, hard-to-test ASP.NET WebForms architecture."
+  },
+  {
+    "id": 3,
+    "title": "3. ASP.NET MVC Core Components",
+    "category": "Phase 1: Architecture & Setup",
+    "language": "csharp",
+    "explanation": "<h3>Action Methods and Action Results</h3>\n<p>In ASP.NET MVC, a Controller is a C# class that inherits from <code>System.Web.Mvc.Controller</code>. The methods inside this class are called <strong>Action Methods</strong>.</p>\n<p>When a user types a URL (like <code>/Product/Details/5</code>), the routing engine maps that URL to the <code>Details(int id)</code> Action Method inside the <code>ProductController</code>.</p>\n<h4>ActionResults</h4>\n<p>An Action Method usually returns an <code>ActionResult</code>. This is an abstract class that tells the framework <em>how</em> to respond to the browser. Common implementations include:</p>\n<ul>\n    <li><strong><code>ViewResult</code></strong> (<code>return View()</code>): Renders an HTML page.</li>\n    <li><strong><code>JsonResult</code></strong> (<code>return Json(data)</code>): Returns JSON data (great for AJAX calls).</li>\n    <li><strong><code>RedirectResult</code></strong> (<code>return Redirect()</code>): Sends a 302 Redirect to the browser.</li>\n    <li><strong><code>FileResult</code></strong> (<code>return File()</code>): Prompts the user to download a file.</li>\n</ul>",
+    "summary": "Controllers contain Action Methods which handle specific URL requests and return an ActionResult, dictating exactly what the browser receives (HTML, JSON, Files, or Redirects)."
+  },
+  {
+    "id": 4,
+    "title": "4. ASP.NET MVC Framework Version History",
+    "category": "Phase 1: Architecture & Setup",
+    "language": "csharp",
+    "explanation": "<h3>The Evolution of Microsoft's Web Stack</h3>\n<p>Understanding the history of ASP.NET MVC is crucial for enterprise developers who often have to maintain legacy systems.</p>\n<ul>\n    <li><strong>MVC 1.0 (2009):</strong> The radical departure from WebForms. Introduced Routing and the basic MVC pattern.</li>\n    <li><strong>MVC 3 (2011):</strong> The game-changer. Introduced the <strong>Razor View Engine</strong> (<code>@</code> syntax), replacing the clunky ASPX engine (<code>&lt;% %&gt;</code>). Added Global Filters and Unobtrusive JavaScript validation.</li>\n    <li><strong>MVC 4 (2012):</strong> Introduced Web API 1.0 (for building REST services) and Bundling/Minification for CSS/JS performance.</li>\n    <li><strong>MVC 5 (2013):</strong> Introduced ASP.NET Identity (modern authentication), Bootstrap integration, and Attribute Routing.</li>\n    <li><strong>ASP.NET Core MVC (2016+):</strong> A total rewrite from scratch. Unifies MVC and Web API into a single framework. Cross-platform, extremely fast, and built on dependency injection.</li>\n</ul>",
+    "summary": "ASP.NET MVC evolved rapidly from 2009 to 2013, culminating in MVC 5, before being entirely rewritten and modernized as ASP.NET Core MVC for cross-platform cloud deployments."
+  },
+  {
+    "id": 5,
+    "title": "5. Creating Your First MVC App in ASP.NET MVC",
+    "category": "Phase 1: Architecture & Setup",
+    "language": "csharp",
+    "explanation": "<h3>The Convention Over Configuration Principle</h3>\n<p>ASP.NET MVC relies heavily on <strong>Convention over Configuration</strong>. This means the framework expects files to be named a certain way and placed in specific folders. If you follow the rules, you don't have to write any configuration XML!</p>\n<h4>The Golden Rules of Naming:</h4>\n<ol>\n    <li><strong>Controllers</strong> must end with the word \"Controller\" (e.g., <code>HomeController.cs</code>).</li>\n    <li><strong>Views</strong> must be placed in a folder matching the controller's prefix (e.g., Views for <code>HomeController</code> go in <code>/Views/Home/</code>).</li>\n    <li><strong>Action Views</strong>: If the Action Method is named <code>Index()</code>, the framework automatically searches for a view file named <code>Index.cshtml</code>.</li>\n</ol>",
+    "code": "// 1. We create HomeController.cs in the /Controllers folder\npublic class HomeController : Controller\n{\n    public ActionResult Welcome()\n    {\n        ViewBag.Message = \"Hello World!\";\n        \n        // Because we don't pass a string to View(), \n        // MVC assumes the view file is named \"Welcome.cshtml\"\n        return View(); \n    }\n}\n\n// 2. We create Welcome.cshtml in the /Views/Home folder\n<h2>@ViewBag.Message</h2>",
+    "mistake": "If you name your controller `HomeControl` instead of `HomeController`, the routing engine will completely ignore it and return a 404 error. The 'Controller' suffix is a strict requirement.",
+    "summary": "By adhering to strict naming conventions for files and folders, ASP.NET MVC automatically wires up Controllers, Actions, and Views without requiring complex configuration files."
+  },
+  {
+    "id": 6,
+    "title": "6. MVC Folder Structure in ASP.NET MVC",
+    "category": "Phase 1: Architecture & Setup",
+    "language": "csharp",
+    "explanation": "<h3>Anatomy of a Standard Project</h3>\n<p>When you create a new ASP.NET MVC 5 project in Visual Studio, it scaffolds a specific directory structure. You must respect this structure for the application to function correctly.</p>\n<h4>The Critical Folders:</h4>\n<ul>\n    <li><strong><code>/App_Start</code></strong>: Contains configuration classes that run when the app boots up (e.g., <code>RouteConfig.cs</code> for URL routes, <code>BundleConfig.cs</code> for CSS/JS minification).</li>\n    <li><strong><code>/Controllers</code></strong>: All C# controller classes.</li>\n    <li><strong><code>/Models</code></strong>: C# classes representing database entities or ViewModels.</li>\n    <li><strong><code>/Views</code></strong>: The HTML/Razor files. Contains a subfolder for each Controller. Also contains a <code>Shared</code> folder for layouts (master pages) and partial views.</li>\n    <li><strong><code>/Content</code></strong>: Static assets like CSS files and images (similar to <code>wwwroot</code> in modern .NET Core).</li>\n    <li><strong><code>/Scripts</code></strong>: Client-side JavaScript libraries (like jQuery and Bootstrap).</li>\n</ul>",
+    "summary": "The MVC folder structure physically enforces the architectural pattern, separating configuration (App_Start), logic (Controllers), data (Models), and presentation (Views)."
+  },
+  {
+    "id": 7,
+    "title": "7. Routing in ASP.NET MVC",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Directing Traffic</h3>\n<p><strong>Routing</strong> is the mechanism that takes an incoming URL from the browser (like <code>www.site.com/Product/List/Laptop</code>) and maps it to a specific C# Controller and Action Method.</p>\n<h4>Convention-Based Routing</h4>\n<p>Configured in <code>RouteConfig.cs</code>. It uses a default template: <code>{controller}/{action}/{id}</code>. If a user visits <code>/Home/Contact/5</code>, MVC parses it as Controller=Home, Action=Contact, ID=5.</p>\n<h4>Attribute Routing (MVC 5+)</h4>\n<p>Instead of relying on a global configuration file, Attribute Routing allows you to place the URL template directly above the Action Method in the C# code. This provides ultimate control for creating clean, SEO-friendly RESTful URLs.</p>",
+    "diagram": "flowchart LR\n    URL[\"Incoming URL: /Store/Browse/Phones\"] --> Engine[\"Routing Engine\"]\n    Engine -->|\"Parses template\"| Map[\"{controller}/{action}/{category}\"]\n    Map -->|\"Instantiates\"| Cont[\"StoreController\"]\n    Cont -->|\"Invokes\"| Action[\"Browse(string category)\"]\n    \n    style Engine fill:#3b82f6,color:#fff\n    style Map fill:#f59e0b,color:#fff",
+    "code": "// Convention Routing (in RouteConfig.cs)\nroutes.MapRoute(\n    name: \"Default\",\n    url: \"{controller}/{action}/{id}\",\n    defaults: new { controller = \"Home\", action = \"Index\", id = UrlParameter.Optional }\n);\n\n// Attribute Routing (Enabled via routes.MapMvcAttributeRoutes())\npublic class ProductController : Controller\n{\n    // This method is now explicitly mapped to www.site.com/products/view/5\n    [Route(\"products/view/{id}\")]\n    public ActionResult Details(int id) { ... }\n}",
+    "summary": "Routing parses incoming URLs and directs them to the correct C# code. You can configure global URL patterns (Convention) or define exact URLs on specific methods (Attribute)."
+  },
+  {
+    "id": 8,
+    "title": "8. Filters in ASP.NET MVC",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Intercepting the Pipeline</h3>\n<p><strong>Filters</strong> allow you to run custom code <em>before</em> or <em>after</em> an Action Method executes. They are an implementation of Aspect-Oriented Programming (AOP), designed to prevent code duplication.</p>\n<p>Instead of writing security checks or logging code inside all 100 of your Action Methods, you create a Filter and apply it via an Attribute (<code>[Authorize]</code>) to the Controller, or globally to the entire application.</p>\n<h4>The 4 Types of Filters (Execution Order):</h4>\n<ol>\n    <li><strong>Authorization Filters:</strong> Runs first. Decides if the user is logged in and allowed to proceed. (e.g., <code>[Authorize]</code>).</li>\n    <li><strong>Action Filters:</strong> Runs immediately before and immediately after the Action Method executes. Great for logging or modifying parameters.</li>\n    <li><strong>Result Filters:</strong> Runs before and after the <code>ActionResult</code> executes (e.g., before the HTML is generated).</li>\n    <li><strong>Exception Filters:</strong> Runs only if an unhandled exception is thrown during execution. (e.g., <code>[HandleError]</code>).</li>\n</ol>",
+    "summary": "Filters are reusable attributes that intercept requests at different stages (Authorization, Action, Result, Exception), keeping Cross-Cutting Concerns like security and logging out of your core business logic."
+  },
+  {
+    "id": 9,
+    "title": "9. Creating Custom ActionFilter Attributes",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Building Your Own Interceptors</h3>\n<p>If you need custom logic (like recording exactly how long a specific method takes to execute), you can build a custom <strong>ActionFilter</strong> by inheriting from the <code>ActionFilterAttribute</code> class.</p>\n<p>You override two main methods:</p>\n<ul>\n    <li><code>OnActionExecuting()</code>: Runs exactly before the controller method starts.</li>\n    <li><code>OnActionExecuted()</code>: Runs exactly after the controller method finishes, but before the View is rendered.</li>\n</ul>",
+    "code": "// 1. Create the custom filter\npublic class TrackPerformanceAttribute : ActionFilterAttribute\n{\n    private Stopwatch _stopwatch;\n\n    public override void OnActionExecuting(ActionExecutingContext filterContext)\n    {\n        _stopwatch = Stopwatch.StartNew(); // Start the timer before execution\n    }\n\n    public override void OnActionExecuted(ActionExecutedContext filterContext)\n    {\n        _stopwatch.Stop(); // Stop timer after execution\n        var time = _stopwatch.ElapsedMilliseconds;\n        \n        // Log the time...\n    }\n}\n\n// 2. Apply it as an attribute\n[TrackPerformance]\npublic ActionResult MassiveDatabaseQuery()\n{\n    // Do heavy work\n    return View();\n}",
+    "summary": "By inheriting from ActionFilterAttribute, you can create custom C# attributes that automatically execute logic before and after specific controller methods."
+  },
+  {
+    "id": 10,
+    "title": "10. Bundling and Minification in ASP.NET MVC",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Optimizing Page Load Performance</h3>\n<p>Modern web pages often rely on dozens of CSS and JavaScript files (Bootstrap, jQuery, custom scripts). If a browser has to download 15 different files, it makes 15 separate HTTP requests to the server, dramatically slowing down page load speeds.</p>\n<p>ASP.NET MVC 4 introduced <strong>Bundling and Minification</strong> to solve this:</p>\n<ul>\n    <li><strong>Bundling:</strong> Combines multiple files into a single massive file. (1 HTTP request instead of 15).</li>\n    <li><strong>Minification:</strong> Strips out all whitespace, line breaks, and comments, and shortens variable names, drastically reducing the file size (sometimes by 60%+).</li>\n</ul>",
+    "summary": "Bundling combines multiple CSS/JS files into one HTTP request, and Minification compresses the code, resulting in drastically faster page load times."
+  },
+  {
+    "id": 11,
+    "title": "11. Implementing ScriptBundle and StyleBundle",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Configuring Bundles</h3>\n<p>You define your bundles inside the <code>App_Start/BundleConfig.cs</code> file. You use <code>ScriptBundle</code> for JavaScript and <code>StyleBundle</code> for CSS.</p>\n<p>The framework only performs the heavy bundling/minification process when the application is built in <strong>Release Mode</strong> (i.e., when <code>debug=\"false\"</code> in <code>web.config</code>). During local development, the files are served individually so you can easily debug your JavaScript in the browser console.</p>",
+    "code": "// 1. Inside App_Start/BundleConfig.cs\npublic class BundleConfig\n{\n    public static void RegisterBundles(BundleCollection bundles)\n    {\n        // Combine 3 separate JS files into one virtual URL: \"~/bundles/core\"\n        bundles.Add(new ScriptBundle(\"~/bundles/core\").Include(\n                    \"~/Scripts/jquery-{version}.js\",\n                    \"~/Scripts/bootstrap.js\",\n                    \"~/Scripts/custom-app.js\"));\n                    \n        // Combine CSS\n        bundles.Add(new StyleBundle(\"~/Content/css\").Include(\n                    \"~/Content/bootstrap.css\",\n                    \"~/Content/site.css\"));\n    }\n}\n\n// 2. Inside your _Layout.cshtml (Master Page)\n@Scripts.Render(\"~/bundles/core\")\n@Styles.Render(\"~/Content/css\")",
+    "summary": "ScriptBundle and StyleBundle define which files should be grouped together. The @Scripts.Render helper dynamically injects either individual script tags (for debugging) or one minified tag (for production)."
+  },
+  {
+    "id": 12,
+    "title": "12. StyleBundle in ASP.NET MVC",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Handling CSS Assets</h3>\n<p>The <code>StyleBundle</code> class works exactly like <code>ScriptBundle</code>, but it is specifically designed for Cascading Style Sheets (CSS). When the bundle is processed, it automatically runs a CSS Minifier that strips out whitespace, comments, and optimizes colors (e.g., converting <code>#ffffff</code> to <code>#fff</code>).</p>\n<h4>Dealing with Relative Paths (The Image Problem)</h4>\n<p>A major gotcha with <code>StyleBundle</code> is how it handles relative paths in CSS. If your <code>site.css</code> has a rule like <code>background-image: url('../images/logo.png')</code>, and you bundle it into a virtual path like <code>~/bundles/css</code>, the browser will look for the image in the wrong folder!</p>\n<p>To fix this, you must use the <code>CssRewriteUrlTransform</code> class. This automatically rewrites all the image URLs inside the CSS file to absolute paths so they don't break when minified.</p>",
+    "code": "public class BundleConfig\n{\n    public static void RegisterBundles(BundleCollection bundles)\n    {\n        // Notice the new CssRewriteUrlTransform() argument!\n        bundles.Add(new StyleBundle(\"~/bundles/styles\").Include(\n                    \"~/Content/bootstrap.css\",\n                    \"~/Content/site.css\", new CssRewriteUrlTransform()));\n    }\n}\n\n// In the Razor View\n@Styles.Render(\"~/bundles/styles\")",
+    "mistake": "If you deploy your app and all the background images and web fonts suddenly disappear, it is 100% because you forgot to include `new CssRewriteUrlTransform()` in your StyleBundle configuration.",
+    "summary": "StyleBundle compresses and concatenates CSS files. When bundling CSS files that contain relative image paths, you must use CssRewriteUrlTransform to prevent the paths from breaking in production."
+  },
+  {
+    "id": 13,
+    "title": "13. Areas in ASP.NET MVC",
+    "category": "Phase 2: Routing, Filters & Bundling",
+    "language": "csharp",
+    "explanation": "<h3>Sub-Dividing Massive Applications</h3>\n<p>In a large enterprise application (like an E-Commerce site), having 50 Controllers in one folder and 500 Views in another folder becomes an unmaintainable nightmare.</p>\n<p><strong>Areas</strong> allow you to physically partition a massive web application into smaller, isolated mini-applications. Each Area gets its own dedicated <code>/Controllers</code>, <code>/Models</code>, and <code>/Views</code> folder structure.</p>\n<h4>How it works:</h4>\n<p>When you right-click your project and select \"Add Area\", MVC creates an <code>/Areas</code> folder. Inside, you might create an <code>Admin</code> area and a <code>Billing</code> area. The routing engine is automatically updated to include the Area name in the URL (e.g., <code>www.site.com/Admin/Dashboard/Index</code>).</p>",
+    "diagram": "flowchart TD\n    Root[\"My Huge Application\"] --> Main[\"Main App (Public Website)\"]\n    Root --> Areas[\"/Areas\"]\n    \n    Areas --> Admin[\"/Admin\"]\n    Admin --> ACont[\"/Controllers\"]\n    Admin --> AView[\"/Views\"]\n    \n    Areas --> Billing[\"/Billing\"]\n    Billing --> BCont[\"/Controllers\"]\n    Billing --> BView[\"/Views\"]\n    \n    style Areas fill:#f59e0b,color:#fff\n    style Admin fill:#10b981,color:#fff",
+    "tip": "When linking between different Areas using `Html.ActionLink`, you MUST specify the 'area' name in the route values parameter, or the routing engine will get lost: `@Html.ActionLink(\"Go to Admin\", \"Index\", \"Dashboard\", new { area = \"Admin\" }, null)`",
+    "summary": "Areas physically partition massive MVC projects into smaller, maintainable modules, each with their own isolated MVC folder structure and URL routing."
+  },
+  {
+    "id": 14,
+    "title": "14. HTML Helpers in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "html",
+    "explanation": "<h3>Writing HTML the C# Way</h3>\n<p>An <strong>HTML Helper</strong> is simply a C# method that returns an HTML string. Instead of manually typing raw HTML tags inside your Razor views, you use these C# methods. </p>\n<h4>Why use HTML Helpers?</h4>\n<ol>\n    <li><strong>Strong Typing:</strong> They bind directly to your C# Model properties. If you rename a property in your Model, the HTML Helper updates automatically. Raw HTML tags would just break silently.</li>\n    <li><strong>Validation:</strong> They automatically read C# Data Annotations (like <code>[Required]</code> or <code>[StringLength(50)]</code>) and inject HTML5 validation attributes directly into the generated HTML.</li>\n    <li><strong>Automatic State:</strong> When a user submits a form and fails validation, the HTML Helpers automatically refill the textboxes with the user's previous input.</li>\n</ol>",
+    "code": "<!-- ❌ The Old, Error-Prone HTML Way -->\n<input type=\"text\" id=\"FirstName\" name=\"FirstName\" value=\"@Model.FirstName\" class=\"form-control\" />\n\n<!-- ✅ The MVC HTML Helper Way -->\n@Html.TextBoxFor(model => model.FirstName, new { @class = \"form-control\" })",
+    "summary": "HTML Helpers are C# methods in Razor Views that programmatically generate HTML tags, providing strong-typing, automatic model binding, and seamless integration with C# validation attributes."
+  },
+  {
+    "id": 15,
+    "title": "15. Creating a Textbox in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Binding Single-Line Input</h3>\n<p>The <code>TextBoxFor</code> HTML helper generates a standard <code>&lt;input type=\"text\"&gt;</code> element. The \"For\" suffix indicates it is a strongly-typed helper that uses a Lambda expression to bind directly to a property on your ViewModel.</p>\n<h4>How Binding Works</h4>\n<p>When the helper runs, it looks at the property you selected (e.g., <code>model.Username</code>). It automatically sets the HTML <code>id</code> and <code>name</code> attributes to exactly match the property name. This is CRITICAL, because when the form is submitted back to the server, the MVC Model Binder relies on the <code>name</code> attribute to reconstruct the C# object!</p>",
+    "code": "// ViewModel\npublic class UserViewModel {\n    public string Username { get; set; }\n}\n\n// Razor View (Strongly Typed)\n@model UserViewModel\n\n<!-- Generates: <input type=\"text\" id=\"Username\" name=\"Username\" value=\"\" class=\"my-css\" /> -->\n@Html.TextBoxFor(m => m.Username, new { @class = \"my-css\", placeholder = \"Enter Username\" })",
+    "mistake": "Notice the `@class` syntax. Because `class` is a reserved keyword in C#, you cannot use it as a standard object property name in the anonymous HTML attributes object. You must escape it with an `@` symbol.",
+    "summary": "Html.TextBoxFor generates a single-line input field deeply bound to a ViewModel property, guaranteeing the HTML 'name' attribute matches the C# property for flawless form submissions."
+  },
+  {
+    "id": 16,
+    "title": "16. Create TextArea in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Multi-Line Text Input</h3>\n<p>For capturing large blocks of text (like a bio, a comment, or an address), you use the <code>TextAreaFor</code> helper. This generates a <code>&lt;textarea&gt;&lt;/textarea&gt;</code> HTML element.</p>\n<p>Just like <code>TextBoxFor</code>, it provides strong binding to the model. However, <code>TextAreaFor</code> allows you to specify the physical dimensions of the input box by setting the <code>rows</code> and <code>columns</code> HTML attributes.</p>",
+    "code": "// Razor View\n@model UserProfileViewModel\n\n<div class=\"form-group\">\n    @Html.LabelFor(m => m.Biography)\n    \n    <!-- Generates a textarea 5 rows tall and 40 columns wide -->\n    @Html.TextAreaFor(m => m.Biography, 5, 40, new { @class = \"form-control\" })\n    \n    @Html.ValidationMessageFor(m => m.Biography)\n</div>",
+    "summary": "Html.TextAreaFor generates a multi-line HTML textarea element, allowing developers to easily set exact row and column dimensions via method overloads while retaining strong model binding."
+  },
+  {
+    "id": 17,
+    "title": "17. Creating CheckBox in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Handling Boolean Values</h3>\n<p>The <code>CheckBoxFor</code> helper generates an <code>&lt;input type=\"checkbox\"&gt;</code> element. It is strictly used for <code>bool</code> (true/false) properties on your ViewModel.</p>\n<h4>The Hidden Input Trick</h4>\n<p>If you inspect the HTML generated by <code>CheckBoxFor</code> in your browser, you will notice something strange: it generates TWO input fields! One is the checkbox, and directly beneath it is a hidden input with the exact same name, set to \"false\".</p>\n<p><strong>Why?</strong> HTML specification dictates that if a checkbox is NOT checked, the browser simply excludes it from the form submission payload entirely. If it was excluded, the MVC server would receive a null value and crash. By injecting a hidden \"false\" input, MVC guarantees that <em>something</em> is always submitted to the server, allowing the model binder to safely evaluate the boolean.</p>",
+    "code": "// ViewModel\npublic class RegistrationModel {\n    public bool AcceptTerms { get; set; }\n}\n\n// Razor View\n<label>\n    @Html.CheckBoxFor(m => m.AcceptTerms)\n    I agree to the Terms and Conditions.\n</label>\n\n<!-- Generated HTML looks like this: -->\n<!-- <input id=\"AcceptTerms\" name=\"AcceptTerms\" type=\"checkbox\" value=\"true\" /> -->\n<!-- <input name=\"AcceptTerms\" type=\"hidden\" value=\"false\" /> -->",
+    "summary": "Html.CheckBoxFor binds to boolean properties and ingeniously injects a hidden 'false' input to ensure the server always receives a definitive true/false value during form submission."
+  },
+  {
+    "id": 18,
+    "title": "18. Creating Radio Button in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Mutually Exclusive Choices</h3>\n<p>The <code>RadioButtonFor</code> helper is used when a user must select exactly ONE option from a predefined list (e.g., Male/Female/Other, or Credit Card/PayPal).</p>\n<p>To group radio buttons together so that selecting one deselects the others, they must all share the exact same HTML <code>name</code> attribute. Because you use the strongly-typed <code>For</code> helper bound to a single ViewModel property, MVC automatically ensures the names match perfectly.</p>",
+    "code": "// ViewModel\npublic class PaymentModel {\n    // This string will hold the exact value of the chosen radio button\n    public string PaymentMethod { get; set; } \n}\n\n// Razor View\n<div>\n    <!-- The second parameter is the exact string value sent to the server if selected -->\n    @Html.RadioButtonFor(m => m.PaymentMethod, \"CreditCard\") Credit Card\n    \n    @Html.RadioButtonFor(m => m.PaymentMethod, \"PayPal\") PayPal\n    \n    @Html.RadioButtonFor(m => m.PaymentMethod, \"BankTransfer\") Bank Transfer\n</div>",
+    "summary": "Html.RadioButtonFor binds multiple radio buttons to a single ViewModel property, ensuring they share the same HTML 'name' attribute and enforce a mutually exclusive selection."
+  },
+  {
+    "id": 19,
+    "title": "19. Creating DropDownList in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Binding to a Collection</h3>\n<p>The <code>DropDownListFor</code> helper generates an HTML <code>&lt;select&gt;</code> element. It is the most complex HTML helper because it requires TWO pieces of data:</p>\n<ol>\n    <li>A property to store the user's final <strong>Selected Value</strong> (e.g., <code>SelectedCountryId</code>).</li>\n    <li>A <code>IEnumerable&lt;SelectListItem&gt;</code> collection containing all the possible <strong>Options</strong> to populate the dropdown list.</li>\n</ol>\n<p>Usually, the Controller queries the database for a list of items (like Countries), maps them to a list of <code>SelectListItem</code> objects, and passes them to the View.</p>",
+    "code": "// 1. The ViewModel holds BOTH the selection property and the list of options\npublic class AddressViewModel {\n    public int SelectedCountryId { get; set; } // Stores the user's choice\n    public IEnumerable<SelectListItem> CountryList { get; set; } // Stores the options\n}\n\n// 2. The Controller populates the options\npublic ActionResult Create() {\n    var model = new AddressViewModel();\n    // In reality, this comes from a database\n    model.CountryList = new List<SelectListItem> {\n        new SelectListItem { Text = \"USA\", Value = \"1\" },\n        new SelectListItem { Text = \"Canada\", Value = \"2\" }\n    };\n    return View(model);\n}\n\n// 3. The View generates the dropdown\n@Html.DropDownListFor(m => m.SelectedCountryId, Model.CountryList, \"--- Select Country ---\", new { @class = \"form-control\" })",
+    "summary": "Html.DropDownListFor requires both a scalar property to store the user's selection and an IEnumerable<SelectListItem> collection to populate the HTML <option> tags."
+  },
+  {
+    "id": 20,
+    "title": "20. Creating Hidden Field in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Preserving Data Across Requests</h3>\n<p>The web is stateless. When a Controller renders a View and sends it to the browser, the server completely forgets about the transaction. If the user submits the form back to the server, the server only receives the data explicitly typed into the input fields.</p>\n<p>If you are editing an existing Database Record (like a User), the server needs to know the <code>Id</code> of that User to update them. But you don't want the user to see or edit their Database ID in a textbox!</p>\n<p>The <code>HiddenFor</code> helper solves this. It generates an <code>&lt;input type=\"hidden\"&gt;</code> tag. The data is embedded in the HTML payload sent to the browser, and silently posted back to the server on submission, bridging the stateless gap.</p>",
+    "code": "// Razor View for editing a User\n@model UserViewModel\n\n@using (Html.BeginForm(\"Edit\", \"User\", FormMethod.Post))\n{\n    // The ID is securely passed back and forth without the user seeing it\n    @Html.HiddenFor(m => m.UserId)\n    \n    @Html.LabelFor(m => m.Name)\n    @Html.TextBoxFor(m => m.Name)\n    \n    <button type=\"submit\">Save Changes</button>\n}",
+    "mistake": "Never store sensitive data (like prices, role permissions, or passwords) in a Hidden field. A malicious user can easily open Chrome Developer Tools, alter the hidden value, and submit a forged request to the server to buy a TV for $1.",
+    "summary": "Html.HiddenFor securely embeds critical tracking data (like Database Primary Keys) into the HTML form without displaying it on the screen, allowing state to survive the stateless HTTP round-trip."
+  },
+  {
+    "id": 21,
+    "title": "21. Create Password Field in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Masking Secure Input</h3>\n<p>The <code>PasswordFor</code> helper generates an <code>&lt;input type=\"password\"&gt;</code> HTML element. This instructs the browser to visually mask the user's keystrokes (usually with asterisks or dots) to prevent shoulder-surfing.</p>\n<h4>The Security Feature</h4>\n<p>Unlike <code>TextBoxFor</code>, if a form submission fails validation (e.g., the user forgot to enter their email address) and the page is re-rendered, the <code>PasswordFor</code> helper will <strong>intentionally clear itself out</strong>.</p>\n<p>It refuses to re-populate the HTML <code>value</code> attribute with the user's previously typed password. This is a deliberate security measure to ensure plain-text passwords are never accidentally cached in the browser's HTML source or history.</p>",
+    "code": "// ViewModel\npublic class LoginViewModel {\n    [Required]\n    public string Username { get; set; }\n    \n    [Required]\n    [DataType(DataType.Password)]\n    public string Password { get; set; }\n}\n\n// Razor View\n<div class=\"form-group\">\n    @Html.LabelFor(m => m.Password)\n    @Html.PasswordFor(m => m.Password, new { @class = \"form-control\" })\n</div>",
+    "summary": "Html.PasswordFor masks user input on the screen and deliberately clears its value upon validation failures to prevent sensitive plain-text passwords from being embedded in the HTML source code."
+  },
+  {
+    "id": 22,
+    "title": "22. Display Field in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Rendering Formatted Text</h3>\n<p>Sometimes you don't want an input box; you just want to render the value of a property as pure text on the screen. While you could just write <code>@Model.DateOfBirth</code>, it's better to use the <code>DisplayFor</code> helper.</p>\n<h4>Why use DisplayFor instead of pure text?</h4>\n<p>Because <code>DisplayFor</code> respects C# Data Annotations! If you apply a <code>[DisplayFormat(DataFormatString = \"{0:C}\")]</code> attribute to a decimal property in your ViewModel, <code>DisplayFor</code> will automatically format that number as local Currency (e.g., $1,250.00) without you having to write string formatting code in the View.</p>",
+    "code": "// ViewModel\npublic class InvoiceModel {\n    // Tell MVC to format this as Currency\n    [DisplayFormat(DataFormatString = \"{0:C}\")]\n    public decimal TotalAmount { get; set; }\n    \n    // Tell MVC to format this as a short date (MM/DD/YYYY)\n    [DisplayFormat(DataFormatString = \"{0:d}\")]\n    public DateTime DueDate { get; set; }\n}\n\n// Razor View\n<p>\n    Invoice Total: @Html.DisplayFor(m => m.TotalAmount) <br/>\n    Due By: @Html.DisplayFor(m => m.DueDate)\n</p>",
+    "summary": "Html.DisplayFor renders pure text while respecting C# Data Annotations, ensuring dates, currencies, and numbers are globally formatted correctly without writing inline logic in the View."
+  },
+  {
+    "id": 23,
+    "title": "23. Creating Labels in ASP.NET MVC",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Accessible Form Descriptions</h3>\n<p>The <code>LabelFor</code> helper generates an HTML <code>&lt;label&gt;</code> element. It automatically generates the <code>for</code> attribute, linking the label to the corresponding input field. This is critical for accessibility (screen readers) and UX (clicking the label focuses the textbox).</p>\n<h4>The Magic of Data Annotations</h4>\n<p>By default, <code>LabelFor(m =&gt; m.FirstName)</code> will render the text \"FirstName\". But you want it to say \"First Name\" (with a space). Instead of hardcoding the text in the HTML view, you apply a <code>[Display(Name = \"First Name\")]</code> attribute to the ViewModel property. The Label helper reads this attribute and renders the human-readable string automatically.</p>",
+    "code": "// ViewModel\npublic class RegistrationModel {\n    [Display(Name = \"Email Address\")]\n    public string Email { get; set; }\n}\n\n// Razor View\n<div class=\"form-group\">\n    <!-- Generates: <label for=\"Email\">Email Address</label> -->\n    @Html.LabelFor(m => m.Email)\n    \n    <!-- Generates: <input type=\"text\" id=\"Email\" name=\"Email\" /> -->\n    @Html.TextBoxFor(m => m.Email)\n</div>",
+    "summary": "Html.LabelFor generates accessible label tags tied directly to input fields, and reads the [Display] data annotation to automatically render human-readable text instead of raw C# property names."
+  },
+  {
+    "id": 24,
+    "title": "24. Form Creation with Html.BeginForm",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Encapsulating Form Submissions</h3>\n<p>To submit data back to the server, all your input fields must be wrapped inside an HTML <code>&lt;form&gt;</code> tag. In MVC, you use the <code>Html.BeginForm()</code> helper.</p>\n<h4>The using Statement</h4>\n<p><code>BeginForm</code> is unique because it is wrapped in a C# <code>using</code> block. When the block opens, it renders the opening <code>&lt;form action=\"/Home/Submit\" method=\"post\"&gt;</code> tag. When the block finishes, the <code>IDisposable</code> interface is triggered, and it automatically renders the closing <code>&lt;/form&gt;</code> tag, ensuring your HTML is never malformed.</p>",
+    "code": "// Razor View\n@using (Html.BeginForm(\"SubmitRegistration\", \"Account\", FormMethod.Post, new { id = \"regForm\" }))\n{\n    // Everything inside this block is part of the form payload\n    @Html.LabelFor(m => m.Username)\n    @Html.TextBoxFor(m => m.Username)\n    \n    <button type=\"submit\">Register</button>\n} // The closing </form> tag is rendered exactly here",
+    "summary": "Html.BeginForm leverages the C# 'using' block to safely render opening and closing HTML form tags, automatically generating the correct routing URLs and HTTP methods for submission."
+  },
+  {
+    "id": 25,
+    "title": "25. Input Validation with ValidationMessageFor",
+    "category": "Phase 3: HTML Helpers & Forms",
+    "language": "csharp",
+    "explanation": "<h3>Displaying Errors to the User</h3>\n<p>When a user submits a form and fails a business rule (e.g., they left the Email field blank, or the Password was too short), the Controller returns the View with <code>ModelState.IsValid == false</code>.</p>\n<p>To show the user exactly <em>why</em> the form failed, you use the <code>ValidationMessageFor</code> helper next to the input field.</p>\n<h4>Unobtrusive Client-Side Validation</h4>\n<p>This helper is deeply integrated with jQuery. If you include the jQuery Validation scripts in your layout, MVC will automatically inject HTML5 <code>data-val</code> attributes into your inputs. This means the form will validate in the browser in real-time, instantly showing the red error messages without ever needing to hit the server!</p>",
+    "code": "// ViewModel\npublic class LoginModel {\n    [Required(ErrorMessage = \"You must enter an email address!\")]\n    [EmailAddress(ErrorMessage = \"That is not a valid email format.\")]\n    public string Email { get; set; }\n}\n\n// Razor View\n<div class=\"form-group\">\n    @Html.LabelFor(m => m.Email)\n    @Html.TextBoxFor(m => m.Email)\n    \n    <!-- If validation fails, the ErrorMessage string from the ViewModel is rendered here -->\n    @Html.ValidationMessageFor(m => m.Email, \"\", new { @class = \"text-danger\" })\n</div>",
+    "summary": "Html.ValidationMessageFor renders specific error messages defined by C# Data Annotations directly next to the offending input fields, supporting both server-side and real-time client-side validation."
+  }
+];

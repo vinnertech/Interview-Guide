@@ -14,17 +14,32 @@ const navGroups = {
     { path: '/jquery', label: 'jQuery' },
   ],
   backend: [
+    { path: '/eda', label: 'Event-Driven Architecture' },
+    { path: '/dotnetcore', label: '.NET Core API' },
     { path: '/dotnet', label: '.NET' },
     { path: '/csharp', label: 'C#' },
     { path: '/java', label: 'Java' },
     { path: '/backend', label: 'Java Backend' },
     { path: '/python', label: 'Python' },
+    { path: '/cpp', label: 'C++' },
     { path: '/nodejs', label: 'Node.js' },
   ],
   database: [
     { path: '/sql', label: 'SQL' },
     { path: '/mongodb', label: 'MongoDB' },
     { path: '/efcore', label: 'EF Core' },
+  ],
+  devops: [
+    { path: '/agile', label: 'Agile & Scrum' },
+    { path: '/git', label: 'Git & GitHub' },
+    { path: '/azuredevops', label: 'Azure DevOps' },
+    { path: '/awsdevops', label: 'AWS DevOps' },
+    { path: '/dockerk8s', label: 'Docker & Kubernetes' },
+  ],
+  tutorials: [
+    { path: '/tutorial/csharp', label: 'C# Guide' },
+    { path: '/tutorial/aspnet-mvc', label: 'ASP.NET MVC Guide' },
+    { path: '/tutorial/aspnet-core', label: 'ASP.NET Core Guide' },
   ]
 };
 
@@ -33,11 +48,11 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    // Default to light theme for a cleaner TutorialsPoint look
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+    // Default to light theme for a cleaner TutorialsPoint look (no local caching)
+    const defaultTheme = 'light';
+    setTheme(defaultTheme);
+    document.documentElement.setAttribute('data-theme', defaultTheme);
+    document.documentElement.setAttribute('data-bs-theme', defaultTheme);
   }, []);
 
   useEffect(() => {
@@ -55,7 +70,6 @@ export default function Navbar() {
     setTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     document.documentElement.setAttribute('data-bs-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
   };
 
   return (
@@ -138,6 +152,34 @@ export default function Navbar() {
                 </a>
                 <ul className="dropdown-menu shadow-sm">
                   {navGroups.database.map(link => (
+                    <li key={link.path}>
+                      <NavLink className="dropdown-item" to={link.path}>{link.label}</NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* DevOps Dropdown */}
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  DevOps & Cloud
+                </a>
+                <ul className="dropdown-menu shadow-sm">
+                  {navGroups.devops.map(link => (
+                    <li key={link.path}>
+                      <NavLink className="dropdown-item" to={link.path}>{link.label}</NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* Tutorials Dropdown */}
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Tutorials
+                </a>
+                <ul className="dropdown-menu shadow-sm">
+                  {navGroups.tutorials.map(link => (
                     <li key={link.path}>
                       <NavLink className="dropdown-item" to={link.path}>{link.label}</NavLink>
                     </li>
