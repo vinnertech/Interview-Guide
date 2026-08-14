@@ -44,8 +44,8 @@ export default function CommandBlock({
       </div>
 
       {/* Code body */}
-      <div className="p-3 position-relative">
-        <pre className="m-0 text-light font-monospace" style={{ fontSize: '0.92rem', lineHeight: '1.5', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+      <div className="p-3 position-relative overflow-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <pre className="m-0 text-light font-monospace" style={{ fontSize: '0.92rem', lineHeight: '1.6', whiteSpace: 'pre', overflowX: 'auto' }}>
           <code>{command}</code>
         </pre>
       </div>
