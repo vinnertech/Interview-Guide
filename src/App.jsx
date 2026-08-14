@@ -35,6 +35,18 @@ import AngularLesson from './pages/tutorial/AngularLesson';
 import TypeScriptGuideHome from './pages/tutorial/TypeScriptGuideHome';
 import TypeScriptLesson from './pages/tutorial/TypeScriptLesson';
 
+// C# Tutorial Pages
+import CSharpGuideHome from './pages/tutorial/CSharpGuideHome';
+import CSharpLesson from './pages/tutorial/CSharpLesson';
+
+// ASP.NET MVC Tutorial Pages
+import AspNetMvcGuideHome from './pages/tutorial/AspNetMvcGuideHome';
+import AspNetMvcLesson from './pages/tutorial/AspNetMvcLesson';
+
+// ASP.NET Core Tutorial Pages
+import AspNetCoreGuideHome from './pages/tutorial/AspNetCoreGuideHome';
+import AspNetCoreLesson from './pages/tutorial/AspNetCoreLesson';
+
 // Import data
 import {
   angularQuestions, backendQuestions, bootstrapQuestions, csharpQuestions,
@@ -100,9 +112,15 @@ export default function App() {
             <Route path="tutorial/react/:chapterId/:lessonId" element={<ReactLesson />} />
             <Route path="tutorial/github" element={<GitHubGuideHome />} />
             <Route path="tutorial/github/:chapterId/:lessonId" element={<GitHubLesson />} />
-            <Route path="tutorial/csharp" element={<TopicPage title="C# Learning Guide" description="A highly detailed and completely accurate C# Learning Guide, carefully structured for beginners from basic syntax to advanced OOP concepts." questions={csharpTutorialQuestions || []} />} />
-            <Route path="tutorial/aspnet-mvc" element={<TopicPage title="ASP.NET MVC Guide" description="A highly detailed and completely accurate ASP.NET MVC Learning Guide, structured for beginners to master web development." questions={aspnetMvcTutorialQuestions || []} />} />
-            <Route path="tutorial/aspnet-core" element={<TopicPage title="ASP.NET Core Guide" description="A comprehensive guide to building high-performance, cross-platform applications with ASP.NET Core." questions={aspnetCoreTutorialQuestions || []} />} />
+            
+            <Route path="tutorial/csharp" element={<CSharpGuideHome />} />
+            <Route path="tutorial/csharp/:chapterId/:lessonId" element={<CSharpLesson />} />
+            
+            <Route path="tutorial/aspnet-mvc" element={<AspNetMvcGuideHome />} />
+            <Route path="tutorial/aspnet-mvc/:chapterId/:lessonId" element={<AspNetMvcLesson />} />
+            
+            <Route path="tutorial/aspnet-core" element={<AspNetCoreGuideHome />} />
+            <Route path="tutorial/aspnet-core/:chapterId/:lessonId" element={<AspNetCoreLesson />} />
             
             <Route path="*" element={<div className="container py-5 text-center"><h1>404 - Page Not Found</h1></div>} />
           </Route>
