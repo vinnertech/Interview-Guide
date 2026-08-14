@@ -55,10 +55,161 @@
     --bs-dropdown-link-hover-bg: var(--hover-bg);
 }
 
-/* Offcanvas Mobile Width Override */
-@media (max-width: 991.98px) {
-    .offcanvas {
-        width: 65% !important;
+/* ==========================================================================
+   Tutorial & Documentation Typography & High-Contrast Design System
+   ========================================================================== */
+.tutorial-page-wrapper {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.lesson-content-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.lesson-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-color);
+}
+
+.lesson-body h2, .lesson-body h3, .lesson-body h4, .lesson-body h5 {
+    color: var(--heading-color) !important;
+    font-weight: 700;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+}
+
+.concept-text {
+    line-height: 1.85;
+    font-size: 1.05rem;
+    color: var(--text-color);
+}
+
+.concept-text p {
+    margin-bottom: 1.35rem;
+    color: var(--text-color);
+}
+
+.concept-text ul, .concept-text ol {
+    margin-bottom: 1.35rem;
+    padding-left: 1.75rem;
+    color: var(--text-color);
+}
+
+.concept-text li {
+    margin-bottom: 0.65rem;
+    line-height: 1.75;
+}
+
+.concept-text strong {
+    color: var(--heading-color) !important;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   High-Contrast, Ultra-Readable Mermaid Architecture Diagrams
+   ========================================================================== */
+.mermaid-wrapper {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.mermaid-scroll-area {
+    background: #ffffff;
+    min-height: 200px;
+    padding: 2rem 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[data-theme="dark"] .mermaid-scroll-area {
+    background: #0f172a;
+}
+
+/* Force High Contrast & Full Fit on Mermaid SVG nodes */
+.mermaid-scroll-area svg {
+    max-width: 100% !important;
+    height: auto !important;
+    min-width: 320px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.06));
+}
+
+.mermaid-scroll-area svg .node rect,
+.mermaid-scroll-area svg .node circle,
+.mermaid-scroll-area svg .node polygon {
+    stroke-width: 2px !important;
+    rx: 8px !important;
+    ry: 8px !important;
+}
+
+.mermaid-scroll-area svg text {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+}
+
+/* High contrast links and edge labels */
+.mermaid-scroll-area svg .flowchart-link {
+    stroke: #3b82f6 !important;
+    stroke-width: 2.5px !important;
+}
+
+[data-theme="dark"] .mermaid-scroll-area svg .flowchart-link {
+    stroke: #60a5fa !important;
+    stroke-width: 2.5px !important;
+}
+
+.mermaid-scroll-area svg .edgeLabel {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="dark"] .mermaid-scroll-area svg .edgeLabel {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+
+/* Mobile Responsiveness Rules */
+@media (max-width: 767.98px) {
+    .lesson-content-card {
+        padding: 1.25rem !important;
+        border-radius: 1rem !important;
+    }
+    
+    .lesson-body {
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .display-6 {
+        font-size: 1.6rem !important;
+    }
+
+    .mermaid-scroll-area {
+        padding: 1rem 0.5rem;
     }
 }
 
@@ -447,4 +598,50 @@ a:hover {
 
 .btn-pulse {
     animation: pulse-glow 2s infinite;
+}
+
+/* ==========================================================================
+   Enhanced Markdown Content Styles
+   ========================================================================== */
+.code-block-wrapper pre {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.concept-text h2, .concept-text h3, .concept-text h4, .concept-text h5, .concept-text h6,
+.content-section h2, .content-section h3, .content-section h4, .content-section h5, .content-section h6 {
+    color: var(--heading-color);
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.2px;
+}
+
+.concept-text table, .content-section table {
+    width: 100%;
+    margin: 1.25rem 0;
+    border-collapse: collapse;
+}
+
+.concept-text table th, .content-section table th {
+    background-color: rgba(55, 88, 249, 0.08);
+    color: var(--heading-color);
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 0.85rem;
+}
+
+.concept-text table td, .content-section table td {
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 0.85rem;
+    color: var(--text-color);
+}
+
+.concept-text blockquote, .content-section blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding: 0.85rem 1.25rem;
+    margin: 1.25rem 0;
+    background-color: rgba(55, 88, 249, 0.06);
+    border-radius: 0.5rem;
+    color: var(--text-color);
 }

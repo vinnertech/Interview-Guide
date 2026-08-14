@@ -37,6 +37,12 @@ const navGroups = {
     { path: '/dockerk8s', label: 'Docker & Kubernetes' },
   ],
   tutorials: [
+    { path: '/tutorial/sql', label: 'SQL Server Guide (New)' },
+    { path: '/tutorial/angular', label: 'Angular Guide' },
+    { path: '/tutorial/typescript', label: 'TypeScript Guide' },
+    { path: '/tutorial/javascript', label: 'JavaScript Guide' },
+    { path: '/tutorial/react', label: 'React.js Guide' },
+    { path: '/tutorial/github', label: 'Git & GitHub Guide' },
     { path: '/tutorial/csharp', label: 'C# Guide' },
     { path: '/tutorial/aspnet-mvc', label: 'ASP.NET MVC Guide' },
     { path: '/tutorial/aspnet-core', label: 'ASP.NET Core Guide' },

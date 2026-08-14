@@ -39,6 +39,12 @@ const topics = [
   { to: '/agile', icon: 'bi-kanban', color: '#0052CC', title: 'Agile & Scrum', desc: 'Agile, Waterfall, Scrum Framework', category: 'Software Engineering' },
 
   // Tutorials
+  { to: '/tutorial/sql', icon: 'bi-database-fill', color: '#e67e22', title: 'SQL Server Guide', desc: 'Zero to Architect Course', category: 'Tutorials (New)' },
+  { to: '/tutorial/angular', icon: 'bi-shield-shaded', color: '#dd0031', title: 'Angular Guide', desc: 'Zero to Architect Course', category: 'Tutorials (New)' },
+  { to: '/tutorial/typescript', icon: 'bi-filetype-tsx', color: '#3178c6', title: 'TypeScript Guide', desc: 'Zero to Architect Course', category: 'Tutorials (New)' },
+  { to: '/tutorial/javascript', icon: 'bi-filetype-js', color: '#f59e0b', title: 'JavaScript Guide', desc: 'Zero to Architect Course', category: 'Tutorials (New)' },
+  { to: '/tutorial/react', icon: 'bi-filetype-jsx', color: '#61dafb', title: 'React.js Guide', desc: 'Zero to Senior Architect Course', category: 'Tutorials (New)' },
+  { to: '/tutorial/github', icon: 'bi-github', color: '#f14e32', title: 'Git & GitHub Guide', desc: 'Zero to Hero Developer Guide', category: 'Tutorials (New)' },
   { to: '/tutorial/csharp', icon: 'bi-book-half', color: '#9B4F96', title: 'C# Learning Guide', desc: 'Beginner to Advanced Tutorial', category: 'Tutorials (New)' },
   { to: '/tutorial/aspnet-mvc', icon: 'bi-window', color: '#512bd4', title: 'ASP.NET MVC Guide', desc: 'Beginner to Advanced MVC', category: 'Tutorials (New)' },
   { to: '/tutorial/aspnet-core', icon: 'bi-rocket-takeoff', color: '#512bd4', title: 'ASP.NET Core Guide', desc: 'High-Performance Web Apps', category: 'Tutorials (New)' }

@@ -11,6 +11,30 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
+// GitHub Tutorial Pages
+import GitHubGuideHome from './pages/tutorial/GitHubGuideHome';
+import GitHubLesson from './pages/tutorial/GitHubLesson';
+
+// React Tutorial Pages
+import ReactGuideHome from './pages/tutorial/ReactGuideHome';
+import ReactLesson from './pages/tutorial/ReactLesson';
+
+// JavaScript Tutorial Pages
+import JavaScriptGuideHome from './pages/tutorial/JavaScriptGuideHome';
+import JavaScriptLesson from './pages/tutorial/JavaScriptLesson';
+
+// SQL Tutorial Pages
+import SqlGuideHome from './pages/tutorial/SqlGuideHome';
+import SqlLesson from './pages/tutorial/SqlLesson';
+
+// Angular Tutorial Pages
+import AngularGuideHome from './pages/tutorial/AngularGuideHome';
+import AngularLesson from './pages/tutorial/AngularLesson';
+
+// TypeScript Tutorial Pages
+import TypeScriptGuideHome from './pages/tutorial/TypeScriptGuideHome';
+import TypeScriptLesson from './pages/tutorial/TypeScriptLesson';
+
 // Import data
 import {
   angularQuestions, backendQuestions, bootstrapQuestions, csharpQuestions,
@@ -64,6 +88,18 @@ export default function App() {
             <Route path="dockerk8s" element={<TopicPage title="Docker & Kubernetes" description="100 Questions: Containers, Images, Volumes, Pods, Deployments, Services, Scenarios, and Production Architecture." questions={dockerk8sQuestions || []} />} />
 
             {/* Tutorials */}
+            <Route path="tutorial/sql" element={<SqlGuideHome />} />
+            <Route path="tutorial/sql/:chapterId/:lessonId" element={<SqlLesson />} />
+            <Route path="tutorial/angular" element={<AngularGuideHome />} />
+            <Route path="tutorial/angular/:chapterId/:lessonId" element={<AngularLesson />} />
+            <Route path="tutorial/typescript" element={<TypeScriptGuideHome />} />
+            <Route path="tutorial/typescript/:chapterId/:lessonId" element={<TypeScriptLesson />} />
+            <Route path="tutorial/javascript" element={<JavaScriptGuideHome />} />
+            <Route path="tutorial/javascript/:chapterId/:lessonId" element={<JavaScriptLesson />} />
+            <Route path="tutorial/react" element={<ReactGuideHome />} />
+            <Route path="tutorial/react/:chapterId/:lessonId" element={<ReactLesson />} />
+            <Route path="tutorial/github" element={<GitHubGuideHome />} />
+            <Route path="tutorial/github/:chapterId/:lessonId" element={<GitHubLesson />} />
             <Route path="tutorial/csharp" element={<TopicPage title="C# Learning Guide" description="A highly detailed and completely accurate C# Learning Guide, carefully structured for beginners from basic syntax to advanced OOP concepts." questions={csharpTutorialQuestions || []} />} />
             <Route path="tutorial/aspnet-mvc" element={<TopicPage title="ASP.NET MVC Guide" description="A highly detailed and completely accurate ASP.NET MVC Learning Guide, structured for beginners to master web development." questions={aspnetMvcTutorialQuestions || []} />} />
             <Route path="tutorial/aspnet-core" element={<TopicPage title="ASP.NET Core Guide" description="A comprehensive guide to building high-performance, cross-platform applications with ASP.NET Core." questions={aspnetCoreTutorialQuestions || []} />} />
